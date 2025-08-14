@@ -2,6 +2,12 @@
 
 A tiny, personal text database manager written as a single Bash script. Store short notes/snippets in simple JSON “databases” under your home directory and manage them with a small set of commands.
 
+<p align="center">
+  <img src="images/pin-screenshot.png" alt="pin screenshot" width="800">
+  <br>
+  <em>pin showing entries in the selected database</em>
+</p>
+
 - Default storage: ~/.config/pin/database/
 - Default database name: pin_default (auto-created on first run)
 
