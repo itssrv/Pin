@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pin — Tiny personal text database</title>
+  <meta name="description" content="Pin is a tiny, personal text database manager written as a single Bash script. Store short notes/snippets in simple JSON databases and manage them from your terminal." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Roboto+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <div class="logo">📌</div>
+        <div class="name">pin</div>
+      </div>
+      <nav class="nav">
+        <a href="#features">Features</a>
+        <a href="#install">Install</a>
+        <a href="#usage">Usage</a>
+        <a href="#screenshot">Screenshot</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <h1>Pin — a tiny, personal text database</h1>
+          <p class="tagline">Store quick notes and snippets in simple JSON files. One small Bash script. Fast, searchable, and delightfully minimal.</p>
+          <div class="cta">
+            <a class="btn primary" href="#install">Install</a>
+            <a class="btn ghost" href="#usage">See usage</a>
+          </div>
+          <ul class="quick-facts">
+            <li>Single Bash script</li>
+            <li>JSON-backed storage</li>
+            <li>macOS & Linux</li>
+          </ul>
+        </div>
+        <div class="hero-media" id="screenshot">
+          <img src="images/pin-screenshot.png" alt="pin showing entries in the selected database" />
+        </div>
+      </div>
+      <div class="backdrop" aria-hidden="true"></div>
+    </section>
+
+    <section id="features" class="section features">
+      <div class="container">
+        <h2>Why Pin?</h2>
+        <div class="grid features-grid">
+          <div class="card">
+            <h3>Minimal by design</h3>
+            <p>Keep your notes close and simple. No servers, no lock-in, just plain JSON files under <code>~/.config/pin/</code>.</p>
+          </div>
+          <div class="card">
+            <h3>Fast CLI workflow</h3>
+            <p>Add and list entries instantly with a few keystrokes. Perfect for quick capture and retrieval.</p>
+          </div>
+          <div class="card">
+            <h3>Multiple databases</h3>
+            <p>Create and switch between databases (e.g. ideas, todos, research) with a single command.</p>
+          </div>
+          <div class="card">
+            <h3>Zero-friction install</h3>
+            <p>Just a Bash script plus <code>jq</code>. Optional <code>figlet</code> for a fancy help banner.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="install" class="section install">
+      <div class="container">
+        <h2>Install</h2>
+        <div class="install-steps">
+          <ol>
+            <li>Ensure dependencies are installed:</li>
+          </ol>
+          <div class="code-columns">
+            <div class="code-card">
+              <div class="code-title">macOS (Homebrew)</div>
+              <pre><code>brew install jq figlet</code></pre>
+            </div>
+            <div class="code-card">
+              <div class="code-title">Debian/Ubuntu</div>
+              <pre><code>sudo apt-get update
+sudo apt-get install -y jq figlet</code></pre>
+            </div>
+          </div>
+
+          <div class="code-card with-header">
+            <div class="code-header">
+              <div class="code-title">One‑line install (replace REPO URL if needed)</div>
+              <button class="copy-btn" data-target="install-one-liner" aria-label="Copy install command">Copy</button>
+            </div>
+            <pre><code id="install-one-liner">curl -fsSL https://raw.githubusercontent.com/itssrv/Pin/main/pin.sh | sudo tee /usr/local/bin/pin >/dev/null && sudo chmod +x /usr/local/bin/pin && pin help</code></pre>
+          </div>
+
+          <ol start="2">
+            <li>Make the script executable and put it on your PATH:</li>
+          </ol>
+          <div class="code-columns">
+            <div class="code-card">
+<pre><code>chmod +x pin.sh
+# System-wide (may require sudo):
+sudo cp pin.sh /usr/local/bin/pin
+
+# Or user-local:
+mkdir -p "$HOME/bin"
+cp pin.sh "$HOME/bin/pin"
+chmod +x "$HOME/bin/pin"
+# Add to your shell rc, if needed:
+# export PATH="$HOME/bin:$PATH"</code></pre>
+            </div>
+          </div>
+          <ol start="3">
+            <li>Verify:</li>
+          </ol>
+          <div class="code-columns">
+            <div class="code-card">
+<pre><code>pin help</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="usage" class="section usage">
+      <div class="container">
+        <h2>Usage</h2>
+        <div class="grid usage-grid">
+          <div class="usage-card">
+            <h3>Add entries</h3>
+<pre><code>pin add "Buy milk"
+pin add "Idea: build a CLI pinboard"</code></pre>
+          </div>
+          <div class="usage-card">
+            <h3>List entries</h3>
+<pre><code>pin</code></pre>
+          </div>
+          <div class="usage-card">
+            <h3>Remove by ID</h3>
+<pre><code>pin rip 3</code></pre>
+          </div>
+          <div class="usage-card">
+            <h3>Multiple databases</h3>
+<pre><code>pin create_db ideas
+pin select_db ideas
+pin add "Explore text embeddings for search"</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section callout">
+      <div class="container callout-inner">
+        <h2>Your notes, your files</h2>
+        <p>Pin stores data in simple JSON files you control. Portable, hackable, and future‑proof.</p>
+        <a class="btn primary" href="#install">Get started</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> Pin. MIT Licensed.</div>
+      <div class="footer-links">
+        <a href="README.md">README</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Copy install one-liner
+    function copyTextFromCode(targetId) {
+      const el = document.getElementById(targetId);
+      if (!el) return;
+      const text = el.innerText || el.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.querySelector(`.copy-btn[data-target="${targetId}"]`);
+        if (btn) {
+          const original = btn.textContent;
+          btn.textContent = 'Copied!';
+          btn.disabled = true;
+          setTimeout(() => { btn.textContent = original; btn.disabled = false; }, 1400);
+        }
+      });
+    }
+
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', () => copyTextFromCode(btn.dataset.target));
+    });
+  </script>
+</body>
+</html>
+
